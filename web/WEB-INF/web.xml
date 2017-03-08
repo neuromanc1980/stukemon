@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>StukemonServlet</servlet-name>
+        <servlet-class>servlets.StukemonServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AltaTrainer</servlet-name>
+        <servlet-class>servlets.AltaTrainer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AltaPokemon</servlet-name>
+        <servlet-class>servlets.AltaPokemon</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BajaPokemon</servlet-name>
+        <servlet-class>servlets.BajaPokemon</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StukemonServlet</servlet-name>
+        <url-pattern>/StukemonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaTrainer</servlet-name>
+        <url-pattern>/AltaTrainer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaPokemon</servlet-name>
+        <url-pattern>/AltaPokemon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BajaPokemon</servlet-name>
+        <url-pattern>/BajaPokemon</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
