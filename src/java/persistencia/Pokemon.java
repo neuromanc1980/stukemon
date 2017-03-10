@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pokemon.findAll", query = "SELECT p FROM Pokemon p"),
+    @NamedQuery(name = "Pokemon.findAllOrdered", query = "SELECT p FROM Pokemon p ORDER BY p.level desc, p.life desc"),
+    @NamedQuery(name = "Pokemon.findAllOrderedBattle", query = "SELECT p FROM Pokemon p ORDER BY p.level"),
     @NamedQuery(name = "Pokemon.findByName", query = "SELECT p FROM Pokemon p WHERE p.name = :name"),
     @NamedQuery(name = "Pokemon.findByType", query = "SELECT p FROM Pokemon p WHERE p.type = :type"),
     @NamedQuery(name = "Pokemon.findByAbility", query = "SELECT p FROM Pokemon p WHERE p.ability = :ability"),

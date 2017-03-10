@@ -4,51 +4,63 @@ package servlets;
 import beans.StukemonEJB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistencia.Trainer;
+import persistencia.Pokemon;
 
 /**
  *
  * @author xaviB
  */
-public class AltaTrainer extends HttpServlet {
-    
-    @EJB 
+public class Gimnasio extends HttpServlet {
+
+    @EJB
     StukemonEJB miEjb;
-
-
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {  
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>-- Alta de entrenadores --</title>");            
+            out.println("<title>Gimnasio</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>-- Alta de entrenadores -- " + request.getContextPath() + "</h1>");
+            out.println("<h1>-- Gimnasio --" + request.getContextPath() + "</h1>");
             
-            //recogemos las variables del formulario
-            String name = request.getParameter("name");
-            int pokeballs = Integer.parseInt(request.getParameter("pokeballs"));
-            int potions = Integer.parseInt(request.getParameter("potions"));
-            int points = 0;
-//           out.println(name+" "+pokeballs+ " "+potions);
-            Trainer t = new Trainer(name, pokeballs, potions, points);
-            //if de si ya existe
-            if(miEjb.insertarTrainer(t)){
-                out.println("<p>Dado de alta!</p>");                
-            }   else    {
-                out.println("<p>Ya existía!</p>");  
+            out.println("<form  method=\"GET\">");
+            out.println("<input type=\"submit\" name = \"opcion\" value=\"Mejorar Vida\">");
+            out.println("<input type=\"submit\" name = \"opcion\" value=\"Conseguir Pociones\">");
+            out.println("</form>");
+            
+            //mejorar vida
+            if ("Mejorar Vida".equals(request.getParameter("opcion"))){
+                out.println("<br><br> --- Mejorar vida ---");
+                
+                out.println("<br><br> --- Elige entrenador ---");
+                //listando entrenadores
+                out.println("<form  method=\"GET\">");
+                out.println("</form>");
+                
+                
+                List <Pokemon> lista = miEjb.SellectAllPokemonsOrdered();
+                for (Pokemon p : lista){
+                    out.println("<p>" + p.getName() + ": Level: " + p.getLevel() + ", life: " + p.getLife() );
+                }                
             }
             
-            out.println("<br><a href=\"StukemonServlet\">Volver</a>");
+            
+            
+            
+            
+            
+            
             out.println("</body>");
             out.println("</html>");
         }

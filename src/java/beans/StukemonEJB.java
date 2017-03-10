@@ -25,9 +25,27 @@ public class StukemonEJB {
       return resultado;
   }
   
+  public List<Trainer> SellectTrainerRanking(){
+      EntityManager em = emf.createEntityManager();
+      List<Trainer> resultado = em.createNamedQuery("Trainer.ranking").getResultList();
+      return resultado;
+  }
+  
   public List<Pokemon> SellectAllPokemons(){
       EntityManager em = emf.createEntityManager();
       List<Pokemon> resultado = em.createNamedQuery("Pokemon.findAll").getResultList();
+      return resultado;
+  }
+  
+  public List<Pokemon> SellectAllPokemonsOrdered(){
+      EntityManager em = emf.createEntityManager();
+      List<Pokemon> resultado = em.createNamedQuery("Pokemon.findAllOrdered").getResultList();
+      return resultado;
+  }
+  
+   public List<Pokemon> SellectAllPokemonsOrderedBattle(){
+      EntityManager em = emf.createEntityManager();
+      List<Pokemon> resultado = em.createNamedQuery("Pokemon.findAllOrderedBattle").getResultList();
       return resultado;
   }
   

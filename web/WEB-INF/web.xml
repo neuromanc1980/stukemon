@@ -16,6 +16,10 @@
         <servlet-name>BajaPokemon</servlet-name>
         <servlet-class>servlets.BajaPokemon</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Gimnasio</servlet-name>
+        <servlet-class>servlets.Gimnasio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StukemonServlet</servlet-name>
         <url-pattern>/StukemonServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>BajaPokemon</servlet-name>
         <url-pattern>/BajaPokemon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Gimnasio</servlet-name>
+        <url-pattern>/Gimnasio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
