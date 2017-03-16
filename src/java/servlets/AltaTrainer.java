@@ -34,12 +34,21 @@ public class AltaTrainer extends HttpServlet {
             out.println("<body>");
             out.println("<h1>-- Alta de entrenadores -- " + request.getContextPath() + "</h1>");
             
+            out.println("<form  method=\"POST\">");
+            out.println("Nombre: <input type=\"text\" name=\"name\" required>");
+            out.println("Pokeballs: <input type=\"number\" name=\"pokeballs\" required>");
+            out.println(" <br>");
+            out.println("Potions: <input type=\"number\" name=\"potions\" required>");
+            out.println("Points: 0 (noob)");
+            out.println("<input type=\"submit\" name = \"alta\" value=\"alta\">");
+            out.println("<br></form> <br>");
+            out.println("<br><a href=\"StukemonServlet\">Volver</a>");
             //recogemos las variables del formulario
             String name = request.getParameter("name");
             int pokeballs = Integer.parseInt(request.getParameter("pokeballs"));
             int potions = Integer.parseInt(request.getParameter("potions"));
             int points = 0;
-//           out.println(name+" "+pokeballs+ " "+potions);
+           out.println(name+" "+pokeballs+ " "+potions);
             Trainer t = new Trainer(name, pokeballs, potions, points);
             //if de si ya existe
             if(miEjb.insertarTrainer(t)){
@@ -48,7 +57,7 @@ public class AltaTrainer extends HttpServlet {
                 out.println("<p>Ya existía!</p>");  
             }
             
-            out.println("<br><a href=\"StukemonServlet\">Volver</a>");
+            
             out.println("</body>");
             out.println("</html>");
         }

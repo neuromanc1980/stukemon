@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistencia.Battle;
+import persistencia.BattleDTO;
 import persistencia.Pokemon;
 import persistencia.Trainer;
 
@@ -85,7 +87,7 @@ public class StukemonServlet extends HttpServlet {
                     out.println("<th> " + t.getName() + "</th>");
                     out.println("<th> " + t.getPoints()+ "</th>");
                     out.println("<th> " + t.getPokeballs()+ "</th>");
-                    out.println("<th> " + t.getPoints()+ "</th>");
+                    out.println("<th> " + t.getPotions()+ "</th>");
                     out.println("<th> " + t.getPokemonCollection().size()+ "</th>");
                 }     
                 out.println("</table>");
@@ -94,10 +96,23 @@ public class StukemonServlet extends HttpServlet {
             //batallas
             if ("batallas".equals(request.getParameter("lista"))){
                 out.println("<br><br> --- Pokemons y batallas ---");
-                List <Pokemon> lista = miEjb.SellectAllPokemonsOrderedBattle();
-                for (Pokemon p : lista){
-                    out.println("<p>Pokemon " + p.getName() + ": batallas ganadas: " + p.getBattleCollection1().size() + ", batallas perdidas: " + p.getBattleCollection2().size() );
-                }                
+                
+                List <BattleDTO> listaBatallas = miEjb.SellectAllBattles();
+                
+                out.println("<br><br> --- Hay "+listaBatallas.size()+" Pokemons con victorias registradas ---");
+                out.println("<table border=\"1\" style=\"width:50%\">");
+                out.println("<th>Winner</th>");
+                out.println("<th>Victories</th>");
+                
+                for (BattleDTO p: listaBatallas){                    
+                    out.println("<tr>");    
+                    out.println("<th> " + p.getName() + "</th>");
+                    out.println("<th> " + p.getVictories()+ "</th>");
+                    
+                }
+                out.println("</table>");
+                
+                
             }
             
             

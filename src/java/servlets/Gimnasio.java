@@ -1,4 +1,3 @@
-
 package servlets;
 
 import beans.StukemonEJB;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistencia.Pokemon;
+import persistencia.Trainer;
 
 /**
  *
@@ -20,7 +20,8 @@ public class Gimnasio extends HttpServlet {
 
     @EJB
     StukemonEJB miEjb;
-  
+    private int check = 0;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,38 +30,72 @@ public class Gimnasio extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Gimnasio</title>");            
+            out.println("<title>Gimnasio</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>-- Gimnasio --" + request.getContextPath() + "</h1>");
-            
+
             out.println("<form  method=\"GET\">");
             out.println("<input type=\"submit\" name = \"opcion\" value=\"Mejorar Vida\">");
             out.println("<input type=\"submit\" name = \"opcion\" value=\"Conseguir Pociones\">");
             out.println("</form>");
-            
-            //mejorar vida
-            if ("Mejorar Vida".equals(request.getParameter("opcion"))){
+
+            //------------------------ mejorar vida ------------------------
+            if ("Mejorar Vida".equals(request.getParameter("opcion")) || (check == 1)) {
                 out.println("<br><br> --- Mejorar vida ---");
-                
-                out.println("<br><br> --- Elige entrenador ---");
+
+                out.println("<br><br> --- Estos entrenadores tienen pokemons y pociones, elige uno  ---");
                 //listando entrenadores
                 out.println("<form  method=\"GET\">");
+                out.println(" <select name=\"trainer\" required>");
+
+                //todos los trainers con pokemons y pociones
+                List<Trainer> trainers = miEjb.SellectAllTrainers();
+
+                for (Trainer t : trainers) {
+                    if (t.getPotions() > 0 && t.getPokemonCollection().size() > 0) {
+                        out.println("<option value=\"" + t.getName() + "\">" + t.getName() + "</option>");
+                    }
+                }
+                check = 1;
+                out.println("</select>");
+                out.println("<input type=\"submit\" name = \"Pokemons\" value=\"Pokemons\">");
                 out.println("</form>");
+
+                //listando pokemons
+                if ("Pokemons".equals(request.getParameter("Pokemons"))) {
+                    Trainer t = miEjb.getTrainerByName(request.getParameter("trainer"));
+                    out.println("<br><br> --- Elige pokemon ---");
+
+                    out.println("<form  method=\"GET\">");
+
+                    out.println(" <select name=\"pokemon\" required>");
+
+                    for (Pokemon p : t.getPokemonCollection()) {
+                        out.println("<option value=\"" + p.getName() + "\">" + p.getName() + "</option>");
+                    }
+                    out.println("</select>");
+                    out.println("<input type=\"submit\" name = \"Upgrade\" value=\"Mejorar\">");
+                    out.println("</form>");
+                    //if (request.getParameter("trainer")).pokemons.size() < 0){
+                    //out.println("No tiene pokemons !");
+                    //}
+                }
                 
-                
-                List <Pokemon> lista = miEjb.SellectAllPokemonsOrdered();
-                for (Pokemon p : lista){
-                    out.println("<p>" + p.getName() + ": Level: " + p.getLevel() + ", life: " + p.getLife() );
-                }                
+            //mejorando pokemon
+                if ("Mejorar".equals(request.getParameter("Upgrade"))) {
+                    Pokemon p = miEjb.getPokemonByName(request.getParameter("pokemon"));
+                    miEjb.UpgradePokemon(p);
+                    out.println("<br>" + request.getParameter("pokemon") + " ha conseguido 50 vida extra!");
+                }
+            
+            
+            
+            
             }
-            
-            
-            
-            
-            
-            
-            
+
+            out.println("<br><br><a href=\"StukemonServlet\">Volver</a>");
+
             out.println("</body>");
             out.println("</html>");
         }
