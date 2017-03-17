@@ -35,9 +35,20 @@ public class StukemonEJB {
       //em.getTransaction().begin();
       pok.setLife(pok.getLife()+50);
       em.persist(pok);
+      Trainer t = em.find(Trainer.class, p.getTrainer().getName());
+      t.setPotions(t.getPotions() - 1);
+      em.persist(t);
       //em.getTransaction().commit();
+      em.close();      
+  }
+  
+  public void buyPotions(Trainer t){
+      EntityManager em = emf.createEntityManager();
+      Trainer tr = em.find(Trainer.class, t.getName());
+      tr.setPoints(tr.getPoints()-10);
+      tr.setPotions(tr.getPotions()+1);
+      em.persist(tr);
       em.close();
-      
   }
   
   public List<Trainer> SellectTrainerRanking(){
