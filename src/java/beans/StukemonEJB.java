@@ -42,6 +42,15 @@ public class StukemonEJB {
       em.close();      
   }
   
+  public void addPoints(Trainer t, int points){
+      EntityManager em = emf.createEntityManager();
+      Trainer tr = em.find(Trainer.class, t.getName());
+      tr.setPoints(tr.getPoints()+points);
+      em.persist(tr);
+      //em.getTransaction().commit();
+      em.close();      
+  }
+  
   public void buyPotions(Trainer t){
       EntityManager em = emf.createEntityManager();
       Trainer tr = em.find(Trainer.class, t.getName());
