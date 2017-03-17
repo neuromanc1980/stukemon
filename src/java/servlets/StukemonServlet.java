@@ -50,6 +50,7 @@ public class StukemonServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Stukemon at " + request.getContextPath() + "</h1>");
             out.println("<a href=\"AltaPokemon\">Alta Pokemon</a>");
+            out.println("<br><a href=\"Batalla\">Batalla!</a>");
             out.println("<br><a href=\"AltaTrainer\">Alta Trainer</a>");
             out.println("<br><a href=\"BajaPokemon\">Baja Pokemon</a>");
             out.println("<br><a href=\"Gimnasio\">Gimnasio</a>");

@@ -116,7 +116,7 @@ public class Gimnasio extends HttpServlet {
                 out.println("<form  method=\"GET\">");
                 out.println(" <select name=\"trainer\" required>");
 
-                //todos los trainers con pokemons y pociones
+                //todos los trainers 
                 List<Trainer> trainers = miEjb.SellectAllTrainers();
 
                 for (Trainer t : trainers) {                   

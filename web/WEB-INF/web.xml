@@ -20,6 +20,10 @@
         <servlet-name>Gimnasio</servlet-name>
         <servlet-class>servlets.Gimnasio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Batalla</servlet-name>
+        <servlet-class>servlets.Batalla</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StukemonServlet</servlet-name>
         <url-pattern>/StukemonServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Gimnasio</servlet-name>
         <url-pattern>/Gimnasio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Batalla</servlet-name>
+        <url-pattern>/Batalla</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
